@@ -6,10 +6,12 @@ import { mockUser } from "@/lib/mock/seed";
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
+  hasHydrated: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   loginWithGoogle: () => Promise<void>;
   logout: () => void;
   setRole: (role: UserRole) => void;
+  setHasHydrated: (value: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -17,6 +19,7 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       isAuthenticated: false,
+      hasHydrated: false,
 
       login: async (email: string, _password: string) => {
         if (email) {
@@ -36,7 +39,18 @@ export const useAuthStore = create<AuthState>()(
         set((state) => ({
           user: state.user ? { ...state.user, role } : null,
         })),
+
+      setHasHydrated: (value) => set({ hasHydrated: value }),
     }),
-    { name: "greentree-auth" }
+    {
+      name: "greentree-auth",
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+      }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
+    }
   )
 );

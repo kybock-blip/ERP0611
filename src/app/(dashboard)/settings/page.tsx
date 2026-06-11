@@ -3,8 +3,17 @@
 import { PageShell } from "@/components/layout/page-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ORG_INFO, USER_ROLES } from "@/lib/constants";
+import { USER_ROLES } from "@/lib/constants";
+import { mockOrganization } from "@/lib/mock/seed";
 import { useAuthStore } from "@/stores/auth-store";
+
+const ORG_FIELDS = [
+  { label: "회사명", value: mockOrganization.name },
+  { label: "사업자번호", value: mockOrganization.businessNumber },
+  { label: "주소", value: mockOrganization.address },
+  { label: "연락처", value: mockOrganization.phone },
+  { label: "이메일", value: mockOrganization.email },
+] as const;
 
 export default function SettingsPage() {
   const { user, setRole } = useAuthStore();
@@ -32,14 +41,22 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
         <Card>
-          <CardHeader><CardTitle>조직 정보</CardTitle></CardHeader>
-          <CardContent className="space-y-1 text-caption text-ink-muted-48">
-            <p>{ORG_INFO.name}</p>
-            <p>사업자번호: {ORG_INFO.businessNumber}</p>
-            <p>주소: {ORG_INFO.address}</p>
-            <p>연락처: {ORG_INFO.phone}</p>
-            <p>이메일: {ORG_INFO.email}</p>
-            <p className="pt-2">Supabase 연동 시 조직 설정이 활성화됩니다.</p>
+          <CardHeader>
+            <CardTitle>조직 정보</CardTitle>
+            <p className="text-tagline font-semibold text-ink">{mockOrganization.name}</p>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <dl className="space-y-2">
+              {ORG_FIELDS.map(({ label, value }) => (
+                <div key={label} className="grid grid-cols-[88px_1fr] gap-2 text-caption">
+                  <dt className="font-medium text-ink-muted-48">{label}</dt>
+                  <dd className="text-ink">{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="border-t border-hairline pt-3 text-fine-print text-ink-muted-48">
+              Supabase 연동 시 조직 설정이 활성화됩니다.
+            </p>
           </CardContent>
         </Card>
       </div>
