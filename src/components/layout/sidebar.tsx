@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Users, FolderKanban, Calendar, MapPin,
-  FileText, FileSignature, Wallet, BarChart3, Settings, X,
+  FileText, FileSignature, Wallet, BarChart3, MessageCircle, Settings, X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/lib/constants";
@@ -13,7 +13,7 @@ import { useUIStore } from "@/stores/ui-store";
 
 const iconMap = {
   LayoutDashboard, Users, FolderKanban, Calendar, MapPin,
-  FileText, FileSignature, Wallet, BarChart3, Settings,
+  FileText, FileSignature, Wallet, BarChart3, MessageCircle, Settings,
 };
 
 export function Sidebar() {

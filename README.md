@@ -26,6 +26,20 @@ npm run dev
 
 Supabase 미설정 시 목업 데이터로 동작합니다.
 
+### 법령 상담 챗봇 (Gemini)
+
+산림보호법 시행령 PDF를 텍스트로 변환해 `data/forest-protection-law.txt`에 포함합니다.  
+사이드바 **법령 상담** 메뉴(`/chat`)에서 AI에게 법령 질문을 할 수 있습니다.
+
+**로컬 / Vercel 환경변수**
+
+```env
+GEMINI_API_KEY=your-gemini-api-key
+# 선택: GEMINI_MODEL=gemini-2.0-flash
+```
+
+Vercel 대시보드 → Project → Settings → Environment Variables에서 `GEMINI_API_KEY`를 추가하세요.
+
 ### Supabase 연동
 
 1. [Supabase](https://supabase.com) 프로젝트 생성
@@ -75,7 +89,8 @@ docs/                    # API 설계 문서
 - [x] 계약 관리 placeholder
 - [x] 회계 관리 (미수금 현황)
 
-### MVP 3 (예정)
+### MVP 3 (진행 중)
+- [x] 산림보호법 시행령 AI 챗봇 (Gemini)
 - [ ] AI 문서 생성
 - [ ] 자동 보고서 PDF/Excel
 

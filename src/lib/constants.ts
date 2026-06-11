@@ -74,5 +74,6 @@ export const NAV_ITEMS: {
   { href: "/contracts", label: "계약", icon: "FileSignature", roles: ["owner", "admin", "manager"] },
   { href: "/accounting", label: "회계", icon: "Wallet", roles: ["owner", "admin"] },
   { href: "/reports", label: "보고서", icon: "BarChart3", roles: ["owner", "admin", "manager"] },
+  { href: "/chat", label: "법령 상담", icon: "MessageCircle", roles: ["owner", "admin", "manager", "staff"] },
   { href: "/settings", label: "설정", icon: "Settings", roles: ["owner", "admin"] },
 ];

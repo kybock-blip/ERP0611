@@ -14,7 +14,7 @@ import { useAuthStore } from "@/stores/auth-store";
 export default function LoginPage() {
   const router = useRouter();
   const { login, loginWithGoogle, isAuthenticated } = useAuthStore();
-  const [email, setEmail] = useState(ORG_INFO.email);
+  const [email, setEmail] = useState<string>(ORG_INFO.email);
   const [password, setPassword] = useState("demo1234");
   const [loading, setLoading] = useState(false);
 
