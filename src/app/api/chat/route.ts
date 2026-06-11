@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { generateLawChatReply, type ChatMessage } from "@/lib/gemini";
+import { toUserFacingChatError } from "@/lib/law-relevance";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -32,10 +33,7 @@ export async function POST(request: Request) {
     const reply = await generateLawChatReply(body.messages);
     return NextResponse.json({ reply });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "챗봇 응답 생성 중 오류가 발생했습니다.";
-
-    const status = message.includes("GEMINI_API_KEY") ? 503 : 500;
+    const { message, status } = toUserFacingChatError(error);
     return NextResponse.json({ error: message }, { status });
   }
 }

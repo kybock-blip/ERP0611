@@ -1,10 +1,9 @@
 import { GoogleGenerativeAI, type Content } from "@google/generative-ai";
 import { getForestLawText, FOREST_LAW_TITLE } from "@/lib/forest-law";
+import { OUT_OF_SCOPE_REPLY, tryLocalLawReply } from "@/lib/law-relevance";
 import type { ChatMessage } from "@/lib/types/chat";
 
 export type { ChatMessage };
-
-const OUT_OF_SCOPE_REPLY = "법령에 있지 않습니다.";
 
 const SYSTEM_INSTRUCTION = `당신은 (주)라온누리나무병원의 ${FOREST_LAW_TITLE} 전문 상담 AI입니다.
 아래 제공된 법령 전문만을 근거로 질문에 답변하세요.
@@ -16,6 +15,7 @@ const SYSTEM_INSTRUCTION = `당신은 (주)라온누리나무병원의 ${FOREST_
    - 질문이 ${FOREST_LAW_TITLE}과 무관한 경우
    - 법령 전문에서 관련 조항·내용을 찾을 수 없는 경우
    - 일반 상식, 추측, 다른 법령에 의존해야만 답할 수 있는 경우
+   - 기관의 주소·위치·연락처 등 본문에 없는 정보를 묻는 경우
 4. 법령에 있는 내용을 답할 때는 한국어로 간결하고 이해하기 쉽게 작성합니다.
 5. "${OUT_OF_SCOPE_REPLY}" 외의 문장을 덧붙이지 마세요.`;
 
@@ -37,7 +37,6 @@ function buildModel() {
 function toGeminiHistory(messages: ChatMessage[]): Content[] {
   const prior = messages.slice(0, -1);
 
-  // UI 환영 메시지 등으로 history가 model부터 시작하면 Gemini API 오류 발생
   let start = 0;
   while (start < prior.length && prior[start].role === "assistant") {
     start += 1;
@@ -49,11 +48,26 @@ function toGeminiHistory(messages: ChatMessage[]): Content[] {
   }));
 }
 
-export async function generateLawChatReply(messages: ChatMessage[]): Promise<string> {
-  if (messages.length === 0 || messages[messages.length - 1].role !== "user") {
-    throw new Error("마지막 메시지는 사용자 질문이어야 합니다.");
-  }
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
+function getRetryDelayMs(error: unknown): number | null {
+  if (!(error instanceof Error)) return null;
+
+  const secondsMatch =
+    error.message.match(/retry in (\d+(?:\.\d+)?)s/i) ??
+    error.message.match(/"retryDelay":"(\d+)s"/);
+
+  if (!secondsMatch) return null;
+
+  const seconds = Number(secondsMatch[1]);
+  if (!Number.isFinite(seconds) || seconds <= 0 || seconds > 45) return null;
+
+  return Math.ceil(seconds * 1000) + 500;
+}
+
+async function requestGeminiReply(messages: ChatMessage[]): Promise<string> {
   const model = buildModel();
   const lastMessage = messages[messages.length - 1].content;
   const history = toGeminiHistory(messages);
@@ -67,4 +81,25 @@ export async function generateLawChatReply(messages: ChatMessage[]): Promise<str
   }
 
   return text.trim();
+}
+
+export async function generateLawChatReply(messages: ChatMessage[]): Promise<string> {
+  if (messages.length === 0 || messages[messages.length - 1].role !== "user") {
+    throw new Error("마지막 메시지는 사용자 질문이어야 합니다.");
+  }
+
+  const lastMessage = messages[messages.length - 1].content;
+  const localReply = tryLocalLawReply(lastMessage);
+  if (localReply) return localReply;
+
+  try {
+    return await requestGeminiReply(messages);
+  } catch (error) {
+    const retryMs = getRetryDelayMs(error);
+    if (retryMs) {
+      await sleep(retryMs);
+      return await requestGeminiReply(messages);
+    }
+    throw error;
+  }
 }
