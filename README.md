@@ -35,7 +35,7 @@ Supabase 미설정 시 목업 데이터로 동작합니다.
 
 ```env
 GEMINI_API_KEY=your-gemini-api-key
-GEMINI_MODEL=gemini-2.5-flash-lite
+GEMINI_MODEL=gemini-2.5-pro
 ```
 
 Vercel 대시보드 → Project → Settings → Environment Variables에서 `GEMINI_API_KEY`를 추가하세요.

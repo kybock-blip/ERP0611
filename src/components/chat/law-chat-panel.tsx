@@ -73,7 +73,7 @@ export function LawChatPanel() {
           산림보호법 상담
         </CardTitle>
         <CardDescription>
-          산림보호법(법률 제20751호, 2026.2.1. 시행) 기반 AI 답변
+          산림보호법(법률 제20751호) · Gemini 2.5 Pro 기반 법령 해석
         </CardDescription>
       </CardHeader>
 
