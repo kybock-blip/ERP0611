@@ -9,12 +9,15 @@ import type {
   ProjectCost,
   Schedule,
 } from "@/lib/types";
+import { ORG_INFO } from "@/lib/constants";
 
-const ORG_ID = "org-001";
+const ORG_ID = ORG_INFO.id;
+
+export const mockOrganization = ORG_INFO;
 
 export const mockUser = {
   id: "user-001",
-  email: "admin@greentree.co.kr",
+  email: ORG_INFO.email,
   fullName: "김조경",
   role: "owner" as const,
   organizationId: ORG_ID,

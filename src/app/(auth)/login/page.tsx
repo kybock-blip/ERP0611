@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { APP_NAME } from "@/lib/constants";
+import { APP_NAME, ORG_INFO } from "@/lib/constants";
 import { useAuthStore } from "@/stores/auth-store";
 
 export default function LoginPage() {
   const router = useRouter();
   const { login, loginWithGoogle, isAuthenticated } = useAuthStore();
-  const [email, setEmail] = useState("admin@greentree.co.kr");
+  const [email, setEmail] = useState(ORG_INFO.email);
   const [password, setPassword] = useState("demo1234");
   const [loading, setLoading] = useState(false);
 

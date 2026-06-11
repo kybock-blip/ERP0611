@@ -2,6 +2,15 @@ import type { UserRole } from "@/lib/types";
 
 export const APP_NAME = "(주)라온누리나무병원";
 
+export const ORG_INFO = {
+  id: "org-001",
+  name: APP_NAME,
+  businessNumber: "123-45-67890",
+  address: "경기도 성남시 분당구 정자일로 123",
+  phone: "031-123-4567",
+  email: "admin@raonnuri.co.kr",
+} as const;
+
 export const CUSTOMER_TYPES = [
   { value: "individual", label: "개인" },
   { value: "corporate", label: "법인" },

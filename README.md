@@ -21,7 +21,7 @@ npm run dev
 
 ### 데모 로그인
 
-- 이메일: `admin@greentree.co.kr`
+- 이메일: `admin@raonnuri.co.kr`
 - 비밀번호: 아무 값 (데모 모드)
 
 Supabase 미설정 시 목업 데이터로 동작합니다.

@@ -1,4 +1,4 @@
-# GreenTree ERP API 설계
+# (주)라온누리나무병원 ERP API 설계
 
 ## 아키텍처
 

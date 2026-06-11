@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { ORG_INFO } from "@/lib/constants";
 
 export default function SignupPage() {
   return (
@@ -22,7 +23,7 @@ export default function SignupPage() {
           <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
             <div className="space-y-1.5">
               <Label>회사명</Label>
-              <Input placeholder="그린트리 조경" required />
+              <Input placeholder={ORG_INFO.name} required />
             </div>
             <div className="space-y-1.5">
               <Label>담당자명</Label>

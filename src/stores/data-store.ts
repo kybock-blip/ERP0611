@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { ORG_INFO } from "@/lib/constants";
 import type { Customer, Project, Schedule } from "@/lib/types";
 import {
   mockCustomers,
@@ -30,7 +31,7 @@ export const useDataStore = create<DataState>()((set) => ({
   addCustomer: (data) =>
     set((s) => ({
       customers: [
-        { ...data, id: genId(), organizationId: "org-001", createdAt: new Date().toISOString().split("T")[0] },
+        { ...data, id: genId(), organizationId: ORG_INFO.id, createdAt: new Date().toISOString().split("T")[0] },
         ...s.customers,
       ],
     })),
@@ -46,7 +47,7 @@ export const useDataStore = create<DataState>()((set) => ({
   addProject: (data) =>
     set((s) => ({
       projects: [
-        { ...data, id: genId(), organizationId: "org-001", createdAt: new Date().toISOString().split("T")[0] },
+        { ...data, id: genId(), organizationId: ORG_INFO.id, createdAt: new Date().toISOString().split("T")[0] },
         ...s.projects,
       ],
     })),
@@ -58,7 +59,7 @@ export const useDataStore = create<DataState>()((set) => ({
 
   addSchedule: (data) =>
     set((s) => ({
-      schedules: [{ ...data, id: genId(), organizationId: "org-001" }, ...s.schedules],
+      schedules: [{ ...data, id: genId(), organizationId: ORG_INFO.id }, ...s.schedules],
     })),
 
   updateSchedule: (id, data) =>

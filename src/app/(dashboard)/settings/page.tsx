@@ -3,7 +3,7 @@
 import { PageShell } from "@/components/layout/page-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { USER_ROLES } from "@/lib/constants";
+import { ORG_INFO, USER_ROLES } from "@/lib/constants";
 import { useAuthStore } from "@/stores/auth-store";
 
 export default function SettingsPage() {
@@ -34,9 +34,12 @@ export default function SettingsPage() {
         <Card>
           <CardHeader><CardTitle>조직 정보</CardTitle></CardHeader>
           <CardContent className="space-y-1 text-caption text-ink-muted-48">
-            <p>그린트리 조경(주)</p>
-            <p>사업자번호: 123-45-67890</p>
-            <p>Supabase 연동 시 조직 설정이 활성화됩니다.</p>
+            <p>{ORG_INFO.name}</p>
+            <p>사업자번호: {ORG_INFO.businessNumber}</p>
+            <p>주소: {ORG_INFO.address}</p>
+            <p>연락처: {ORG_INFO.phone}</p>
+            <p>이메일: {ORG_INFO.email}</p>
+            <p className="pt-2">Supabase 연동 시 조직 설정이 활성화됩니다.</p>
           </CardContent>
         </Card>
       </div>

@@ -1,4 +1,4 @@
--- GreenTree ERP - PostgreSQL Schema
+-- (주)라온누리나무병원 ERP - PostgreSQL Schema
 -- Supabase migration
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
