@@ -17,7 +17,7 @@ const SUGGESTED_QUESTIONS = [
 const WELCOME_MESSAGE: ChatMessage = {
   role: "assistant",
   content:
-    "안녕하세요. 산림보호법 시행령 상담 챗봇입니다. 산림보호구역, 벌채 허가, 수목 관리 등 법령 관련 질문을 입력해 주세요.",
+    "안녕하세요. 산림보호법 시행령 상담 챗봇입니다. 시행령 본문에 있는 내용만 답변하며, 관련 없는 질문에는 \"법령에 있지 않습니다.\"라고 안내합니다.",
 };
 
 export function LawChatPanel() {
