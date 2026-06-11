@@ -24,7 +24,7 @@ function buildModel() {
   const genAI = new GoogleGenerativeAI(apiKey);
 
   return genAI.getGenerativeModel({
-    model: process.env.GEMINI_MODEL ?? "gemini-2.0-flash",
+    model: process.env.GEMINI_MODEL ?? "gemini-2.5-flash-lite",
     systemInstruction: `${SYSTEM_INSTRUCTION}\n\n[${FOREST_LAW_TITLE} 전문]\n${lawText}`,
   });
 }
