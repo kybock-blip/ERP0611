@@ -36,7 +36,7 @@ export function tryLocalLawReply(question: string): string | null {
 
   const lawText = getForestLawText();
 
-  // 시행령에 기관·장소의 주소/위치 정보는 없음 (연락처만 있음)
+  // 법령 본문에 기관·장소의 주소/위치 정보는 없음 (연락처만 있음)
   if (LOCATION_QUESTION.test(q)) {
     const asksOrganizationLocation =
       /산림청|산림청장|법제처|농림축산식품부/.test(q) &&
@@ -65,7 +65,7 @@ export function tryLocalLawReply(question: string): string | null {
     return OUT_OF_SCOPE_REPLY;
   }
 
-  // 시행령과 무관한 주제
+  // 산림보호법과 무관한 주제
   if (
     /날씨|주식|비트코인|축구|연예인|맛집|레시피|번역|영어|수학|코딩/.test(q) &&
     !lawText.includes(terms[0] ?? "")

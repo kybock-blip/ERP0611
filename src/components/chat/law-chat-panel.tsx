@@ -17,7 +17,7 @@ const SUGGESTED_QUESTIONS = [
 const WELCOME_MESSAGE: ChatMessage = {
   role: "assistant",
   content:
-    "안녕하세요. 산림보호법 시행령 상담 챗봇입니다. 시행령 본문에 있는 내용만 답변하며, 관련 없는 질문에는 \"법령에 있지 않습니다.\"라고 안내합니다.",
+    "안녕하세요. 산림보호법 상담 챗봇입니다. 법률 본문에 있는 내용만 답변하며, 관련 없는 질문에는 \"법령에 있지 않습니다.\"라고 안내합니다.",
 };
 
 export function LawChatPanel() {
@@ -70,10 +70,10 @@ export function LawChatPanel() {
       <CardHeader className="shrink-0 border-b border-hairline pb-4">
         <CardTitle className="flex items-center gap-2 text-base">
           <Bot className="h-5 w-5 text-primary" />
-          산림보호법 시행령 상담
+          산림보호법 상담
         </CardTitle>
         <CardDescription>
-          산림보호법 시행령(대통령령 제36066호, 2026.2.1. 시행) 기반 AI 답변
+          산림보호법(법률 제20751호, 2026.2.1. 시행) 기반 AI 답변
         </CardDescription>
       </CardHeader>
 

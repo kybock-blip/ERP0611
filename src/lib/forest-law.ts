@@ -11,4 +11,4 @@ export function getForestLawText(): string {
   return cachedLawText;
 }
 
-export const FOREST_LAW_TITLE = "산림보호법 시행령";
+export const FOREST_LAW_TITLE = "산림보호법";
