@@ -30,7 +30,15 @@ function buildModel() {
 }
 
 function toGeminiHistory(messages: ChatMessage[]): Content[] {
-  return messages.slice(0, -1).map((msg) => ({
+  const prior = messages.slice(0, -1);
+
+  // UI 환영 메시지 등으로 history가 model부터 시작하면 Gemini API 오류 발생
+  let start = 0;
+  while (start < prior.length && prior[start].role === "assistant") {
+    start += 1;
+  }
+
+  return prior.slice(start).map((msg) => ({
     role: msg.role === "user" ? "user" : "model",
     parts: [{ text: msg.content }],
   }));
