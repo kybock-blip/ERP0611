@@ -94,7 +94,7 @@ export default function LoginPage() {
       </section>
 
       <footer className="bg-canvas-parchment px-6 py-16 text-center text-fine-print text-ink-muted-48">
-        © 2025 GreenTree ERP · 행운을 빕니다. 책임감 있게 즐기세요.
+        © 2025 {APP_NAME} · 행운을 빕니다. 책임감 있게 즐기세요.
       </footer>
     </div>
   );

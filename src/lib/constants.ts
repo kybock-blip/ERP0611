@@ -1,6 +1,6 @@
 import type { UserRole } from "@/lib/types";
 
-export const APP_NAME = "GreenTree ERP";
+export const APP_NAME = "(주)라온누리나무병원";
 
 export const CUSTOMER_TYPES = [
   { value: "individual", label: "개인" },

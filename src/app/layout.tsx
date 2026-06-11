@@ -9,7 +9,7 @@ import { APP_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: APP_NAME,
-  description: "조경회사·나무병원을 위한 클라우드 ERP SaaS 플랫폼",
+  description: "(주)라온누리나무병원 — 조경·수목관리 ERP 플랫폼",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
